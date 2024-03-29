@@ -1,0 +1,21 @@
+spring:
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true # query? ??? ??? ??
+        default_batch_fetch_size: 500 # ??? ??? ?? ? ?? ???
+    database: mysql
+    show-sql: true
+    open-in-view: true # ??? ????? ?? ??? ???? ??? ??
+
+  application:
+    name: altf4
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tutorial?serverTimezone=UTC
+    username: ssafy
+    password: ssafy
+
