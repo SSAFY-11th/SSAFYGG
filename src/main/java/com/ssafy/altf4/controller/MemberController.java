@@ -2,8 +2,10 @@ package com.ssafy.altf4.controller;
 
 import com.ssafy.altf4.dto.MemberDto;
 import com.ssafy.altf4.entity.Member;
-import com.ssafy.altf4.entity.Role;
+import com.ssafy.altf4.global.jwt.TokenDto;
+import com.ssafy.altf4.global.jwt.TokenManager;
 import com.ssafy.altf4.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
 public class MemberController {
 
     private final MemberService memberService;
+
+    private final TokenManager tokenManager;
 
     @GetMapping("/findAll")
     public ResponseEntity<List> findAll() {
@@ -39,16 +43,24 @@ public class MemberController {
     @PostMapping("/signup")
     public ResponseEntity<Boolean> signUp (@RequestBody MemberDto.SignUp request){
 
-        Member createMember = Member.builder()
-                .username(request.getUsername())
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .nickName(request.getNickname())
-                .role(Role.USER)
-                .build();
-
-        memberService.signup(createMember);
+        memberService.signup(request);
 
         return ResponseEntity.ok(true);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<Boolean> update (@RequestBody MemberDto.Update request){
+
+        memberService.update(request);
+
+        return ResponseEntity.ok(true);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<TokenDto> login(@RequestBody MemberDto.Request request){
+
+        TokenDto token = memberService.login(request.getEmail(), request.getPassword());
+
+        return ResponseEntity.ok(token);
     }
 }

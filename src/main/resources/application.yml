@@ -19,3 +19,8 @@ spring:
     username: ssafy
     password: ssafy
 
+token:
+  secret: token # 임의의 문자열
+  access-token-expiration-time: 9000000 # 15분 1000(ms) x 60(s) x 15(m) (* 10 : 테스트용 -> 150분)
+  refresh-token-expiration-time: 1209600000 # 2주 1000(ms) x 60 (s) x 60(m) x 24(h) x 14(d)
+

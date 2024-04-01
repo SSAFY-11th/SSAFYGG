@@ -53,9 +53,19 @@ public class MemberDto {
     }
 
     @Data
-    public static class SignUp{
+    public static class Update{
 
-        private Long id;
+        private String username;
+
+        private String email;
+
+        private String password;
+
+        private String nickname;
+    }
+
+    @Data
+    public static class SignUp{
 
         private String username;
 
@@ -67,5 +77,16 @@ public class MemberDto {
 
         @Enumerated(EnumType.STRING)
         private Role role;
+
+        public static Member from(MemberDto.SignUp dto){
+
+            return Member.builder()
+                    .username(dto.getUsername())
+                    .email(dto.getEmail())
+                    .password(dto.getPassword())
+                    .nickName(dto.getNickname())
+                    .role(Role.USER)
+                    .build();
+        }
     }
 }
