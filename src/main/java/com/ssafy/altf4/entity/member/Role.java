@@ -1,4 +1,4 @@
-package com.ssafy.altf4.entity;
+package com.ssafy.altf4.entity.member;
 
 public enum Role {
     USER, ADMIN;

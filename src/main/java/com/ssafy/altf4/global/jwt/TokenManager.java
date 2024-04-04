@@ -1,6 +1,6 @@
 package com.ssafy.altf4.global.jwt;
 
-import com.ssafy.altf4.entity.Role;
+import com.ssafy.altf4.entity.member.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

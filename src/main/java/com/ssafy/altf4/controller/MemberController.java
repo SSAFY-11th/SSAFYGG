@@ -1,7 +1,7 @@
 package com.ssafy.altf4.controller;
 
 import com.ssafy.altf4.dto.MemberDto;
-import com.ssafy.altf4.entity.Member;
+import com.ssafy.altf4.entity.member.Member;
 import com.ssafy.altf4.global.jwt.TokenDto;
 import com.ssafy.altf4.global.jwt.TokenManager;
 import com.ssafy.altf4.service.MemberService;
@@ -62,5 +62,17 @@ public class MemberController {
         TokenDto token = memberService.login(request.getEmail(), request.getPassword());
 
         return ResponseEntity.ok(token);
+    }
+
+    @PostMapping("/access-token/issue")
+    public ResponseEntity<TokenDto.AccessTokenDto> createAccessTokenByRefreshToken(HttpServletRequest request){
+
+        String authorization = request.getHeader("Authorization");
+
+        String refreshToken = authorization.split(" ")[1];
+
+        TokenDto.AccessTokenDto accessTokenResponseDTO = memberService.createAccessTokenByRefreshToken(refreshToken);
+
+        return ResponseEntity.ok(accessTokenResponseDTO);
     }
 }

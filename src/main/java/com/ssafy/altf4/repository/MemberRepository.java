@@ -1,6 +1,6 @@
 package com.ssafy.altf4.repository;
 
-import com.ssafy.altf4.entity.Member;
+import com.ssafy.altf4.entity.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

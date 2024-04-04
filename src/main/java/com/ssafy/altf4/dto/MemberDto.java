@@ -1,7 +1,7 @@
 package com.ssafy.altf4.dto;
 
-import com.ssafy.altf4.entity.Member;
-import com.ssafy.altf4.entity.Role;
+import com.ssafy.altf4.entity.member.Member;
+import com.ssafy.altf4.entity.member.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;

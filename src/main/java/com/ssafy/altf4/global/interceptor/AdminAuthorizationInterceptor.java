@@ -1,6 +1,6 @@
 package com.ssafy.altf4.global.interceptor;
 
-import com.ssafy.altf4.entity.Role;
+import com.ssafy.altf4.entity.member.Role;
 import com.ssafy.altf4.global.jwt.TokenManager;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;

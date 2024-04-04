@@ -1,6 +1,8 @@
-package com.ssafy.altf4.entity;
+package com.ssafy.altf4.entity.member;
 
 import com.ssafy.altf4.dto.MemberDto;
+import com.ssafy.altf4.entity.champion.Champion;
+import com.ssafy.altf4.entity.champion.FavoriteChampion;
 import com.ssafy.altf4.global.util.DateTimeUtils;
 import com.ssafy.altf4.global.jwt.TokenDto;
 import jakarta.persistence.*;
@@ -10,6 +12,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -38,6 +42,9 @@ public class Member {
     private String refreshToken;
 
     private LocalDateTime tokenExpirationTime;
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<FavoriteChampion> favoriteChampions = new ArrayList<>();
 
     public void updateMember(MemberDto.Update dto){
 

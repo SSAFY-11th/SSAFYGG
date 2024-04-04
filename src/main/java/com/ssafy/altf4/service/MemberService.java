@@ -1,14 +1,17 @@
 package com.ssafy.altf4.service;
 
 import com.ssafy.altf4.dto.MemberDto;
-import com.ssafy.altf4.entity.Member;
+import com.ssafy.altf4.entity.member.Member;
+import com.ssafy.altf4.global.jwt.GrantType;
 import com.ssafy.altf4.global.jwt.TokenDto;
 import com.ssafy.altf4.global.jwt.TokenManager;
 import com.ssafy.altf4.repository.MemberRepository;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -71,5 +74,24 @@ public class MemberService {
         findMember.updateToken(jwtTokenDto);
 
         return jwtTokenDto;
+    }
+
+    public TokenDto.AccessTokenDto createAccessTokenByRefreshToken(String token){
+
+        Claims tokenClaims = tokenManager.getTokenClaims(token);
+
+        Long findId = (Long) tokenClaims.get("id");
+
+        Member findMember = findById(findId);
+
+        Date accessTokenExpireTime = tokenManager.createAccessTokenExpireTime();
+
+        String accessToken = tokenManager.createAccessToken(findMember.getId(), findMember.getRole(), accessTokenExpireTime);
+
+        return TokenDto.AccessTokenDto.builder()
+                .grantType(GrantType.BEARER.getType())
+                .accessToken(accessToken)
+                .accessTokenExpireTime(accessTokenExpireTime)
+                .build();
     }
 }
