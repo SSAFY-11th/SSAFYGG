@@ -1,0 +1,3 @@
+logging:
+  level:
+    com.ssafy.altf4: info
