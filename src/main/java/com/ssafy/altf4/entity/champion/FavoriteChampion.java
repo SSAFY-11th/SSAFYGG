@@ -2,9 +2,13 @@ package com.ssafy.altf4.entity.champion;
 
 import com.ssafy.altf4.entity.member.Member;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
-@Entity
+@Entity @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class FavoriteChampion {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
